@@ -9,18 +9,49 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
+  justify-content:center; // centers in the flex direction and the default flex-direction is row
+  align-items:center; // centers perpendicular to the flex direction
+  height: 100vh; // 100% view height
+  width: 100vw; // 100% view width
+  position: absolute; // so it goes behind the current content
+
 `
 
-const { Component } = React,
-      { render } = ReactDOM,
-      rootNode = document.getElementById('root')
+const button = styled.div `
+  
+`
+// const { Component } = React,
+//       { render } = ReactDOM,
+//       rootNode = document.getElementById('root')
 
 
 class App extends React.Component {
-  state = initialData;
+  // state = initialData;
 
   state = {
-    listItems: [],
+    tasks: {
+      'task-1': {id:'task-1',content:'research step 1'},
+      'task-2': {id:'task-2',content:'research step 2'},
+      'task-3': {id:'task-3',content:'research step 3'},
+      'task-4': {id:'task-4',content:'research step 4'},
+
+  },
+
+    columns: {
+        'column-1': {
+            id: 'column-1',
+            title: 'Steps',
+            taskIds: ['task-1','task-2','task-3','task-4'],
+        },
+
+        'column-2': {
+            id: 'column-2',
+            title: 'Resources',
+            taskIds: [],
+          }
+    },
+
+    columnOrder: ['column-1', 'column-2'],
     userInput: '',
   }
 
@@ -112,19 +143,17 @@ class App extends React.Component {
               // return column.title
             })}
           </Container>
-
+          {/* <ul>
+        {
+          this.state.listItems.map((li,key) => <li {...{key}}>{li}</li>)
+        }
+      </ul> */}
+        {/* <input value={this.state.userInput} onChange={this.inputChangeHandler} /> */}
+        <button type="button">Add</button>
       </DragDropContext>
 
     //   <div>
-    //   <ul>
-    //     {
-    //       this.state.listItems.map((li,key) => <li {...{key}}>{li}</li>)
-    //     }
-    //   </ul>
-    //   <form onSubmit={this.submitHandler}>
-    //     <input value={this.state.userInput} onChange={this.inputChangeHandler} />
-    //     <input type="submit" value="Add a List" />
-    //   </form>
+
     // </div>
     );
   }
