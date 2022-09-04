@@ -58,17 +58,7 @@ class App extends React.Component {
     userInput: '',
   }
 
-  // inputChangeHandler = ({target:{value}}) => this.setState({
-  //   userInput: value
-  // })
-  
-  // submitHandler = e =>{
-  //   e.preventDefault()
-  //   this.setState({
-  //     listItems: [...this.state.listItems, this.state.userInput],
-  //     userInput: ''
-  //   })
-  // }  
+
 
   onDragEnd = result => {
 
@@ -104,14 +94,50 @@ class App extends React.Component {
 
   };
 
+
+  inputChangeHandler = ({ target: { value } }) =>
+  this.setState({
+    newTask: value,
+  });
+
+  submitHandler = e => {
+    e.preventDefault();
+    this.setState(prevState => {
+      // increment task count
+      const newCount = prevState.count + 1;
+      // create new id based on task count
+      const newId = `task-${newCount}`;
+      return {
+        count: newCount,
+        // clear input
+        newTask: '',
+        tasks: {
+          // add to tasks array
+          ...prevState.tasks,
+          [newId]: { id: newId, content: prevState.newTask },
+        },
+        // add task id at the end of first column
+        columns: {
+          ...prevState.columns,
+          'column-1': {
+            ...prevState.columns['column-1'],
+            taskIds: [...prevState.columns['column-1'].taskIds, newId],
+          },
+        },
+      };
+    });
+  };
+
   render() {
 
     const liStyle = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-}
+  }
+
     return (
+      <div style ={liStyle}>
       <Container style={liStyle}>
         <DragDropContext
         onDragEnd={this.onDragEnd}>
@@ -123,6 +149,24 @@ class App extends React.Component {
           })}
         </DragDropContext>
       </Container>
+      <form onSubmit={this.submitHandler}>
+          <input
+            type="text"
+            id="content"
+            className="teste"
+            value={this.state.newTask}
+            onChange={this.inputChangeHandler}
+          />
+          <input
+            type="text"
+            id="content"
+            className="teste"
+            value={this.state.newTask}
+            onChange={this.inputChangeHandler}
+          />
+          <input type="submit" value="Submit"/>
+      </form>;
+      </div>
     )
   }
 }
