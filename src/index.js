@@ -11,22 +11,13 @@ const Container = styled.div`
 
 `
 
-const Button = styled.button `
-position: absolute;
-right: 100px;
-top: 300px;
-
-
-`
-// const { Component } = React,
-//       { render } = ReactDOM,
-//       rootNode = document.getElementById('root')
-
-
 class App extends React.Component {
   // state = initialData;
+  // constructor(props) {
+  //   super(props);
 
   state = {
+    count: 8,
     tasks: {
       'task-1': {id:'task-1',content:'research step 1'},
       'task-2': {id:'task-2',content:'research step 2'},
@@ -46,7 +37,6 @@ class App extends React.Component {
             title: 'Steps',
             taskIds: ['task-1','task-2','task-3','task-4'],
         },
-
         'column-2': {
             id: 'column-2',
             title: 'Resources',
@@ -55,9 +45,11 @@ class App extends React.Component {
     },
 
     columnOrder: ['column-1', 'column-2'],
-    userInput: '',
-  }
-
+    // new_things: {
+    new_step : '',
+    new_resource : '',
+    // }
+  } 
 
 
   onDragEnd = result => {
@@ -95,48 +87,85 @@ class App extends React.Component {
   };
 
 
-  inputChangeHandler = ({ target: { value } }) =>
-  this.setState({
-    newTask: value,
-  });
+  inputChangeHandler = (e) => {
+    this.setState(prevState => ({
+     ...prevState.new_things,
+     new_step: e.target.value,
+     })); 
+    console.log(e.target.value)
+   }
+   inputChangeHandler_2 = (e) => {
+    this.setState(prevState => ({
+     ...prevState.new_things,
+     new_resource: e.target.value,
+     })); 
+    console.log(e.target.value)
+   }
+
+  // inputChangeHandler =(e) => {
+  //   e.preventDefault()
+  //   console.log('testing: ',this)
+  // };
+
+  // debugging what state looks like at the beginning
+  componentDidMount() {
+    console.log('first time: ',this.state)
+  }
+  
 
   submitHandler = e => {
     e.preventDefault();
     this.setState(prevState => {
       // increment task count
-      const newCount = prevState.count + 1;
+      var newCount_1 = prevState.count + 1;
       // create new id based on task count
-      const newId = `task-${newCount}`;
+
+      const newId_1 = `task-${newCount_1}`;
+
+      var newCount_2 = newCount_1 + 1;
+      // create new id based on task count
+      const newId_2 = `task-${newCount_2}`;
+      console.log(this.state)
+
       return {
-        count: newCount,
+        count: newCount_2,
         // clear input
-        newTask: '',
+        new_step: '',
+        new_resource:'',
         tasks: {
           // add to tasks array
           ...prevState.tasks,
-          [newId]: { id: newId, content: prevState.newTask },
+          [newId_1]: { id: newId_1, content: prevState.new_step},
+          [newId_2]: { id: newId_2, content: prevState.new_resource},
         },
         // add task id at the end of first column
         columns: {
           ...prevState.columns,
           'column-1': {
             ...prevState.columns['column-1'],
-            taskIds: [...prevState.columns['column-1'].taskIds, newId],
+            taskIds: [...prevState.columns['column-1'].taskIds, newId_1],
+          },
+          'column-2': {
+            ...prevState.columns['column-2'],
+            taskIds: [...prevState.columns['column-2'].taskIds, newId_2],
           },
         },
       };
     });
   };
 
-  render() {
 
+
+  render() {
     const liStyle = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   }
 
+
     return (
+      
       <div style ={liStyle}>
       <Container style={liStyle}>
         <DragDropContext
@@ -152,22 +181,28 @@ class App extends React.Component {
       <form onSubmit={this.submitHandler}>
           <input
             type="text"
+            name = "step"
             id="content"
             className="teste"
-            value={this.state.newTask}
+            value={this.state.new_step}
             onChange={this.inputChangeHandler}
           />
           <input
             type="text"
+            name = "resource"
             id="content"
             className="teste"
-            value={this.state.newTask}
-            onChange={this.inputChangeHandler}
+            value={this.state.new_resource }
+            onChange={this.inputChangeHandler_2}
           />
           <input type="submit" value="Submit"/>
       </form>;
       </div>
+      
+
+
     )
+
   }
 }
 
