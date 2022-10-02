@@ -12,44 +12,46 @@ const Container = styled.div`
 `
 
 class App extends React.Component {
-  // state = initialData;
-  // constructor(props) {
-  //   super(props);
-
-  state = {
-    count: 8,
-    tasks: {
-      'task-1': {id:'task-1',content:'research step 1'},
-      'task-2': {id:'task-2',content:'research step 2'},
-      'task-3': {id:'task-3',content:'research step 3'},
-      'task-4': {id:'task-4',content:'research step 4'},
-
-      'task-5': {id:'task-5',content:'research step 1'},
-      'task-6': {id:'task-6',content:'research step 2'},
-      'task-7': {id:'task-7',content:'research step 3'},
-      'task-8': {id:'task-8',content:'research step 4'},
-
-  },
-
-    columns: {
-        'column-1': {
-            id: 'column-1',
-            title: 'Steps',
-            taskIds: ['task-1','task-2','task-3','task-4'],
-        },
-        'column-2': {
-            id: 'column-2',
-            title: 'Resources',
-            taskIds: ['task-5','task-6','task-7','task-8'],
-          }
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 8,
+      tasks: {
+        'task-1': {id:'task-1',content:'research step 1'},
+        'task-2': {id:'task-2',content:'research step 2'},
+        'task-3': {id:'task-3',content:'research step 3'},
+        'task-4': {id:'task-4',content:'research step 4'},
+  
+        'task-5': {id:'task-5',content:'research step 1'},
+        'task-6': {id:'task-6',content:'research step 2'},
+        'task-7': {id:'task-7',content:'research step 3'},
+        'task-8': {id:'task-8',content:'research step 4'},
+  
     },
+  
+      columns: {
+          'column-1': {
+              id: 'column-1',
+              title: 'Steps',
+              taskIds: ['task-1','task-2','task-3','task-4'],
+          },
+          'column-2': {
+              id: 'column-2',
+              title: 'Resources',
+              taskIds: ['task-5','task-6','task-7','task-8'],
+            }
+      },
+  
+      columnOrder: ['column-1', 'column-2'],
+      new_step : '',
+      new_resource : '',
+    }
 
-    columnOrder: ['column-1', 'column-2'],
-    // new_things: {
-    new_step : '',
-    new_resource : '',
-    // }
-  } 
+    this.inputChangeHandler = this.inputChangeHandler.bind(this)
+
+  }
+
+ 
 
 
   onDragEnd = result => {
@@ -87,25 +89,14 @@ class App extends React.Component {
   };
 
 
-  inputChangeHandler = (e) => {
+  inputChangeHandler(e) {
     this.setState(prevState => ({
      ...prevState.new_things,
-     new_step: e.target.value,
-     })); 
-    console.log(e.target.value)
-   }
-   inputChangeHandler_2 = (e) => {
-    this.setState(prevState => ({
-     ...prevState.new_things,
-     new_resource: e.target.value,
+     [e.target.name]: e.target.value,
      })); 
     console.log(e.target.value)
    }
 
-  // inputChangeHandler =(e) => {
-  //   e.preventDefault()
-  //   console.log('testing: ',this)
-  // };
 
   // debugging what state looks like at the beginning
   componentDidMount() {
@@ -181,19 +172,19 @@ class App extends React.Component {
       <form onSubmit={this.submitHandler}>
           <input
             type="text"
-            name = "step"
             id="content"
             className="teste"
+            name="new_step"
             value={this.state.new_step}
             onChange={this.inputChangeHandler}
           />
           <input
             type="text"
-            name = "resource"
             id="content"
             className="teste"
+            name="new_resource"
             value={this.state.new_resource }
-            onChange={this.inputChangeHandler_2}
+            onChange={this.inputChangeHandler}
           />
           <input type="submit" value="Submit"/>
       </form>;
