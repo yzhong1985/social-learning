@@ -24,6 +24,8 @@ export default class Task extends React.Component {
           {this.props.task.content}
         </Container>
       )}
+    {/* <button onClick={this.props.removeBox}>X</button> */}
+
     </Draggable>
     );
   }
