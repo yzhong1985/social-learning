@@ -19,14 +19,6 @@ const TaskList = styled.div`
 
 export default class Column extends React.Component {
 
-
-  // remove(id) {
-  //   this.setState({
-  //     boxes: this.state.boxes.filter(box => box.id !== id)
-  //   });
-  // }
-
-
   render() {
     return (
       <Container>
