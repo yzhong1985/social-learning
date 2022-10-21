@@ -5,6 +5,7 @@ import Column from './Column';
 
 import { DragDropContext } from 'react-beautiful-dnd';
 import styled from 'styled-components';
+import Browsingpage from './Browsingpage';
 
 const Container = styled.div`
 
@@ -44,13 +45,18 @@ class Panel extends React.Component {
       columnOrder: ['column-1', 'column-2'],
       new_step : '',
       new_resource : '',
+      name: 'Sam'
     }
 
     this.inputChangeHandler = this.inputChangeHandler.bind(this)
 
   }
 
- 
+
+  add_guide(e){
+    e.preventDefault();
+    return <Browsingpage new_name = {this.state.name}/>
+  }
 
 
   onDragEnd = result => {
@@ -152,11 +158,9 @@ class Panel extends React.Component {
     alignItems: 'center',
     justifyContent: 'center',
   }
-
-
     return (
       
-      <div style ={liStyle}>
+      <div>
       <Container style={liStyle}>
         <DragDropContext
         onDragEnd={this.onDragEnd}>
@@ -168,7 +172,9 @@ class Panel extends React.Component {
           })}
         </DragDropContext>
       </Container>
-      <form onSubmit={this.submitHandler}>
+      <form onSubmit={this.submitHandler} style={liStyle}>
+          <input type="submit" value="Submit"/>
+
           <input
             type="text"
             id="content"
@@ -185,8 +191,8 @@ class Panel extends React.Component {
             value={this.state.new_resource }
             onChange={this.inputChangeHandler}
           />
-          <input type="submit" value="Submit"/>
       </form>;
+      <button onClick={this.add_guide} style={liStyle}>Share this guide</button>
       </div>
       
 
