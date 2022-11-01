@@ -4,7 +4,7 @@ import Browsingpage from "./Browsingpage"
 import Profile from "./Profile"
 import { Route, Routes, NavLink } from "react-router-dom";
 import "./App.css";
-
+import SquareDetails from "./SquareDetails"
 
 class App extends Component {
   constructor(props) {
@@ -17,11 +17,10 @@ class App extends Component {
         'task-3': {id:'task-3',content:'research step 3'},
         'task-4': {id:'task-4',content:'research step 4'},
   
-        'task-5': {id:'task-5',content:'research step 1'},
-        'task-6': {id:'task-6',content:'research step 2'},
-        'task-7': {id:'task-7',content:'research step 3'},
-        'task-8': {id:'task-8',content:'research step 4'},
-  
+        'task-5': {id:'task-5',content:'book 1'},
+        'task-6': {id:'task-6',content:'book 2'},
+        'task-7': {id:'task-7',content:'book 3'},
+        'task-8': {id:'task-8',content:'book 4'},
     },
   
       columns: {
@@ -40,13 +39,39 @@ class App extends Component {
       columnOrder: ['column-1', 'column-2'],
       new_step : '',
       new_resource : '',
-      name: ['Sam']
-    }
+      square_titles: ['Sam_study_guide'],
+
+      data_count : 4,
+      squares_info: [
+      {
+        id: "1",
+        title: 'Sam_study_guide',
+        content: "step and resource"
+      },
+      {
+        id: "2",
+        title: 'Sam_study_guide',
+        content: "step and resource"
+
+      },
+      {
+        id: "3",
+        title: 'Sam_study_guide',
+        content: "step and resource"
+      },
+      {
+        id: "4",
+        title: 'Sam_study_guide',
+        content: "step and resource"
+      },
+    ]
+    };
 
     this.inputChangeHandler = this.inputChangeHandler.bind(this)
     this.add_to_browse = this.add_to_browse.bind(this)
 
   }
+
 
 
   onDragEnd = result => {
@@ -89,15 +114,8 @@ class App extends Component {
      ...prevState.new_things,
      [e.target.name]: e.target.value,
      })); 
-    console.log(e.target.value)
    }
 
-
-  // debugging what state looks like at the beginning
-  componentDidMount() {
-    console.log('first time: ',this.state)
-  }
-  
 
   submitHandler = e => {
     e.preventDefault();
@@ -111,7 +129,6 @@ class App extends Component {
       var newCount_2 = newCount_1 + 1;
       // create new id based on task count
       const newId_2 = `task-${newCount_2}`;
-      console.log(this.state)
 
       return {
         count: newCount_2,
@@ -140,29 +157,65 @@ class App extends Component {
     });
   };
 
+  // add this.state into data state under a new square 
   add_to_browse() {
-    const newState = {
-      ...this.state,
-      name: [
-        ...this.state.name,
-        'Carl']
+    //initialize new state instance(square)
+
+    var steps_array = []
+    var resources_array = []
+    console.log("this: ", this)
+    this.state.columnOrder?.map((columnId) => {
+      const column = this.state.columns[columnId];
+      const map_tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
+      if (column.title == 'steps') {
+        // append the map task content to steps
+        steps_array.push(map_tasks)
+      } else {
+        // append the map task content to resource
+        resources_array.push(map_tasks)
       }
-    this.setState(newState)
-    console.log('add new name')
+    })
+    console.log(steps_array,resources_array)
+    // add this instance to the data state
+
+    //id below is undefined!!! Needed FIX!!!
+    const newDataState = {
+      data_count : this.state.data_count + 1,
+      // ...this.data_state.squares_info,
+      squares_info: [
+        ...this.state.squares_info,
+        {
+        id: ''+this.data_count,
+        title: 'Sam_study_guide',
+        content: steps_array.concat(resources_array).toString()
+      }]
+      }
+    console.log('the newstate is: ',newDataState)
+    this.setState(newDataState,()=>console.log("the new state is ", this.state))
+
+
   }
 
   render() {
+    const getSquares = props => {
+      let id = props.match.params.squareid;
+      let currentSquare = this.states.squares_info.find(
+        square =>square.id === id
+      );
+      return <SquareDetails {...props} square={currentSquare} />;
+    };
+
     return (
 
       <div className='App'>
       <nav className='App-nav'>
-        <NavLink activeClassName='active-link' to='/'>
+        <NavLink className='active-link' to='/'>
           Creation
         </NavLink>
-        <NavLink activeClassName='active-link' to='/browsing'>
+        <NavLink className='active-link' to='/browsing'>
           Browsing
         </NavLink>
-        <NavLink activeClassName='active-link' to='/profile'>
+        <NavLink className='active-link' to='/profile'>
           Profile
         </NavLink>
 
@@ -175,8 +228,12 @@ class App extends Component {
             columnOrder={this.state.columnOrder} 
             new_step={this.state.new_step} 
             new_resource={this.state.new_resource} />} />
-        <Route exact path='/browsing' element={<Browsingpage name={this.state.name}/>} />
+        <Route exact path='/browsing' element={<Browsingpage data_state={this.state}/>} />
         <Route exact path='/profile' element={<Profile/>} />
+        <Route exact path='/browsing/:squareid' element={<SquareDetails square_details={this.state.squares_info}/>} />
+
+        {/* <Route exact path='/browsing:square_detail_titles' element={<Profile/>} /> */}
+
       </Routes>
 
 

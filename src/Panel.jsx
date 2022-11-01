@@ -18,7 +18,6 @@ class Panel extends React.Component {
     alignItems: 'center',
     justifyContent: 'center',
   }
-    console.log(this.props)
     const {add_to_browse, columnOrder, columns, inputChangeHandler, new_resource, new_step, onDragEnd, tasks, submitHandler} = this.props
     return (
       
