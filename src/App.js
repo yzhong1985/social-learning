@@ -72,8 +72,6 @@ class App extends Component {
 
   }
 
-
-
   onDragEnd = result => {
 
     const {destination, source, draggableId } = result;
@@ -159,40 +157,45 @@ class App extends Component {
 
   // add this.state into data state under a new square 
   add_to_browse() {
-    //initialize new state instance(square)
+    
+    const newDataState = prevState => {
+      var steps_array = []
+      var resources_array = []
+      this.state.columnOrder?.map((columnId) => {
+        const column = this.state.columns[columnId];
+        const map_tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
+        console.log("map tasks: ",map_tasks)
+  
+        map_tasks.map(task => console.log("accessing content ",task['content']))
+        if (column.title == 'steps') {
 
-    var steps_array = []
-    var resources_array = []
-    console.log("this: ", this)
-    this.state.columnOrder?.map((columnId) => {
-      const column = this.state.columns[columnId];
-      const map_tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
-      if (column.title == 'steps') {
-        // append the map task content to steps
-        steps_array.push(map_tasks)
-      } else {
-        // append the map task content to resource
-        resources_array.push(map_tasks)
-      }
-    })
-    console.log(steps_array,resources_array)
-    // add this instance to the data state
+          map_tasks.map(task => steps_array.push(task['content']))
+        } else {
 
-    //id below is undefined!!! Needed FIX!!!
-    const newDataState = {
-      data_count : this.state.data_count + 1,
+          map_tasks.map(task => resources_array.push(task['content']))
+  
+        }
+      })
+      console.log(steps_array,resources_array)
+      // add this instance to the data state
+      const guide_array = steps_array.concat(resources_array)
+      console.log("guide_array: ",guide_array)
+
+      const data_count = this.state.data_count + 1
       // ...this.data_state.squares_info,
-      squares_info: [
-        ...this.state.squares_info,
-        {
-        id: ''+this.data_count,
-        title: 'Sam_study_guide',
-        content: steps_array.concat(resources_array).toString()
-      }]
-      }
-    console.log('the newstate is: ',newDataState)
-    this.setState(newDataState,()=>console.log("the new state is ", this.state))
+      return {
+        data_count: data_count,
+        squares_info: [
+          ...prevState.squares_info,
+          {
+          id: ''+data_count,
+          title: 'Sam_study_guide',
+          content: guide_array.toString()
+        }]
+      } 
+    }
 
+    this.setState(newDataState,()=>console.log("the new state is ", this.state))
 
   }
 
@@ -232,12 +235,8 @@ class App extends Component {
         <Route exact path='/profile' element={<Profile/>} />
         <Route exact path='/browsing/:squareid' element={<SquareDetails square_details={this.state.squares_info}/>} />
 
-        {/* <Route exact path='/browsing:square_detail_titles' element={<Profile/>} /> */}
-
       </Routes>
 
-
-      
     </div>
 
 

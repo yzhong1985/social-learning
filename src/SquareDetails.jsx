@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
  
- 
 function SquareDetails(square_details) {
     const params = useParams();
     const id = params.squareid
