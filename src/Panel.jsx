@@ -7,9 +7,13 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import Browsingpage from './Browsingpage';
 
-const Container = styled.div`
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
-`
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 class Panel extends React.Component {
   constructor(props) {
@@ -88,9 +92,8 @@ class Panel extends React.Component {
         [newColumn.id]: newColumn,
       },
     };
-  
-    this.setState(newState);
 
+    this.setState(newState);
   };
 
 
@@ -151,7 +154,6 @@ class Panel extends React.Component {
   };
 
 
-
   render() {
     const liStyle = {
     display: 'flex',
@@ -161,38 +163,33 @@ class Panel extends React.Component {
     return (
       
       <div>
-      <Container style={liStyle}>
-        <DragDropContext
-        onDragEnd={this.onDragEnd}>
-          {this.state.columnOrder.map((columnId) => {
+      <Container>
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          {
+            this.state.columnOrder.map((columnId) => {
             const column = this.state.columns[columnId];
-            const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
-            
+            const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]); 
             return <Column key={column.id} column={column} tasks={tasks} />;
           })}
         </DragDropContext>
       </Container>
-      <form onSubmit={this.submitHandler} style={liStyle}>
-          <input type="submit" value="Submit"/>
-
-          <input
-            type="text"
-            id="content"
-            className="teste"
-            name="new_step"
-            value={this.state.new_step}
-            onChange={this.inputChangeHandler}
-          />
-          <input
-            type="text"
-            id="content"
-            className="teste"
-            name="new_resource"
-            value={this.state.new_resource }
-            onChange={this.inputChangeHandler}
-          />
-      </form>;
-      <button onClick={this.add_guide} style={liStyle}>Share this guide</button>
+      <Form onSubmit={this.submitHandler}>
+      <Container>
+        <Row>
+          <Col md={4}><Form.Label>New Step</Form.Label></Col>
+          <Col md={4}><Form.Label>New Resource</Form.Label></Col>
+        </Row>
+        <Row>
+          <Col md={4}><Form.Control type="step" placeholder="Enter new step" /></Col>
+          <Col md={4}><Form.Control type="resources" placeholder="Enter new resource" /></Col>
+        </Row>
+        <Row className='row-buttons'>
+          <Col md={4}><Button variant="primary" type="submit">Submit</Button>{' '}
+          <Button variant="success" onClick={this.add_guide}>Share this guide</Button></Col>
+        </Row>
+      </Container>
+      
+      </Form>
       </div>
       
 
