@@ -122,9 +122,9 @@ class App extends Component {
 
 
   submitHandler = e => {
-    console.log('get here');
+    
     e.preventDefault();
-    alert('test');
+
     this.setState(prevState => {
       // increment task count
       var newCount_1 = prevState.count + 1;
