@@ -22,3 +22,7 @@
     color: rgba(248, 187, 208, 1);
     cursor: pointer;
   }
+
+  .row-buttons button {
+    margin: 5px 5px 0 0;
+  }

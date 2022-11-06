@@ -6,6 +6,12 @@ import { Route, Routes, NavLink } from "react-router-dom";
 import "./App.css";
 import SquareDetails from "./SquareDetails"
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -116,7 +122,9 @@ class App extends Component {
 
 
   submitHandler = e => {
+    console.log('get here');
     e.preventDefault();
+    alert('test');
     this.setState(prevState => {
       // increment task count
       var newCount_1 = prevState.count + 1;
@@ -211,18 +219,22 @@ class App extends Component {
     return (
 
       <div className='App'>
-      <nav className='App-nav'>
-        <NavLink className='active-link' to='/'>
-          Creation
-        </NavLink>
-        <NavLink className='active-link' to='/browsing'>
-          Browsing
-        </NavLink>
-        <NavLink className='active-link' to='/profile'>
-          Profile
-        </NavLink>
+        <Navbar bg="dark" variant="dark" expand="lg">
+        <Container>
+          <Navbar.Brand href="#home">Social Learning</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href='/'>Home</Nav.Link>
+              <Nav.Link href='/'>Creation</Nav.Link>
+              <Nav.Link href='/browsing'>Browsing</Nav.Link>
+              <Nav.Link href='/profile'>Profile</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
 
-      </nav>
+        </Container>
+        </Navbar>
+
       <Routes>
         <Route exact path='/' element={<Panel add_to_browse={this.add_to_browse} onDragEnd={this.onDragEnd} inputChangeHandler={this.inputChangeHandler}
             submitHandler={this.submitHandler}
