@@ -1,20 +1,23 @@
 import React, { Component } from "react";
+import { Route, Routes } from "react-router-dom";
+
 import Panel from "./Panel";
 import Browsingpage from "./Browsingpage"
 import Profile from "./Profile"
-import { Route, Routes, NavLink } from "react-router-dom";
-import "./App.css";
 import SquareDetails from "./SquareDetails"
-
 import TopNavBar from "./components/TopNavBar"
 
+import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import sampleData from "./data/datasample.json"
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       count: 8,
+      tasks_sample:sampleData.tasks,
       tasks: {
         'task-1': {id:'task-1',content:'research step 1'},
         'task-2': {id:'task-2',content:'research step 2'},
@@ -43,32 +46,10 @@ class App extends Component {
       columnOrder: ['column-1', 'column-2'],
       new_step : '',
       new_resource : '',
-      square_titles: ['Sam_study_guide'],
-
       data_count : 4,
-      squares_info: [
-      {
-        id: "1",
-        title: 'Sam_study_guide',
-        content: "step and resource"
-      },
-      {
-        id: "2",
-        title: 'Sam_study_guide',
-        content: "step and resource"
+      squares_info:sampleData.squares,
 
-      },
-      {
-        id: "3",
-        title: 'Sam_study_guide',
-        content: "step and resource"
-      },
-      {
-        id: "4",
-        title: 'Sam_study_guide',
-        content: "step and resource"
-      },
-    ]
+      
     };
 
     this.inputChangeHandler = this.inputChangeHandler.bind(this)
@@ -127,9 +108,7 @@ class App extends Component {
       // increment task count
       var newCount_1 = prevState.count + 1;
       // create new id based on task count
-
       const newId_1 = `task-${newCount_1}`;
-
       var newCount_2 = newCount_1 + 1;
       // create new id based on task count
       const newId_2 = `task-${newCount_2}`;
@@ -168,18 +147,14 @@ class App extends Component {
       var steps_array = []
       var resources_array = []
       this.state.columnOrder?.map((columnId) => {
-        const column = this.state.columns[columnId];
-        const map_tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
+        const column = this.state.columns[columnId]
+        const map_tasks = column.taskIds.map(taskId => this.state.tasks[taskId])
         console.log("map tasks: ",map_tasks)
-  
         map_tasks.map(task => console.log("accessing content ",task['content']))
-        if (column.title == 'steps') {
-
+        if (column.title === 'steps') {
           map_tasks.map(task => steps_array.push(task['content']))
         } else {
-
           map_tasks.map(task => resources_array.push(task['content']))
-  
         }
       })
       console.log(steps_array,resources_array)
@@ -194,11 +169,12 @@ class App extends Component {
         squares_info: [
           ...prevState.squares_info,
           {
-          id: ''+data_count,
-          title: 'Sam_study_guide',
-          content: guide_array.toString()
-        }]
-      } 
+            id: "" + data_count,
+            title: "Sam_study_guide",
+            content: guide_array.toString(),
+          },
+        ],
+      }; 
     }
 
     this.setState(newDataState,()=>console.log("the new state is ", this.state))
