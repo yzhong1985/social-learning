@@ -1,28 +1,27 @@
-.App-nav {
-    width: 50%;
-    display: flex;
-    margin: 1rem auto;
-    justify-content: space-around;
-  }
-  
-  .active-link {
-    color: pink;
-    border-bottom: 1px solid white;
-  }
-  
-  a {
-    font-size: 2rem;
-    text-decoration: none;
-    color: rgb(38, 36, 36);
-    transition: all 0.4s ease-out;
-  }
-  
-  .App-nav a:hover {
-    /* border-bottom: 1px solid rgba(248, 187, 208, 1); */
-    color: rgba(248, 187, 208, 1);
-    cursor: pointer;
-  }
-
-  .row-buttons button {
-    margin: 5px 5px 0 0;
-  }
+.me-auto a {
+  display: block;
+  padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+  font-size: var(--bs-nav-link-font-size);
+  font-weight: var(--bs-nav-link-font-weight);
+  color: var(--bs-nav-link-color);
+  text-decoration: none;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+  padding-right: var(--bs-navbar-nav-link-padding-x);
+  padding-left: var(--bs-navbar-nav-link-padding-x);
+}
+.navbar-nav a {
+  color: #fff;
+  text-decoration: none;
+}
+.navbar-nav li {
+  margin-top: 0;
+}
+.navbar-nav li.active {
+  font-weight: bold;
+}
+.navbar-nav li:hover {
+  font-weight: bold;
+}
+.row-buttons button {
+  margin: 5px 5px 0 0;
+}

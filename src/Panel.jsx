@@ -1,12 +1,8 @@
 import React from 'react';
-import '@atlaskit/css-reset';
 
 import Column from './Column'; 
 
 import { DragDropContext } from 'react-beautiful-dnd';
-import styled from 'styled-components';
-
-import Browsingpage from './Browsingpage';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';

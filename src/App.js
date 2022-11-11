@@ -6,11 +6,9 @@ import { Route, Routes, NavLink } from "react-router-dom";
 import "./App.css";
 import SquareDetails from "./SquareDetails"
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import TopNavBar from "./components/TopNavBar"
 
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   constructor(props) {
@@ -217,41 +215,30 @@ class App extends Component {
     };
 
     return (
-
-      <div className='App'>
-        <Navbar bg="dark" variant="dark" expand="lg">
-        <Container>
-          <Navbar.Brand href="#home">Social Learning</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href='/'>Home</Nav.Link>
-              <Nav.Link href='/'>Creation</Nav.Link>
-              <Nav.Link href='/browsing'>Browsing</Nav.Link>
-              <Nav.Link href='/profile'>Profile</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-
-        </Container>
-        </Navbar>
-
-      <Routes>
-        <Route exact path='/' element={<Panel add_to_browse={this.add_to_browse} onDragEnd={this.onDragEnd} inputChangeHandler={this.inputChangeHandler}
-            submitHandler={this.submitHandler}
-            tasks={this.state.tasks} 
-            columns={this.state.columns} 
-            columnOrder={this.state.columnOrder} 
-            new_step={this.state.new_step} 
-            new_resource={this.state.new_resource} />} />
-        <Route exact path='/browsing' element={<Browsingpage data_state={this.state}/>} />
-        <Route exact path='/profile' element={<Profile/>} />
-        <Route exact path='/browsing/:squareid' element={<SquareDetails square_details={this.state.squares_info}/>} />
-
-      </Routes>
-
-    </div>
-
-
+      <>
+        <TopNavBar></TopNavBar>
+        <div className="container">
+          <Routes>
+            <Route exact path="/home" element={
+                <Panel
+                  add_to_browse={this.add_to_browse}
+                  onDragEnd={this.onDragEnd}
+                  inputChangeHandler={this.inputChangeHandler}
+                  submitHandler={this.submitHandler}
+                  tasks={this.state.tasks}
+                  columns={this.state.columns}
+                  columnOrder={this.state.columnOrder}
+                  new_step={this.state.new_step}
+                  new_resource={this.state.new_resource}
+                />
+              }/>
+            <Route exact path="/browsing" element={<Browsingpage data_state={this.state} />} />
+            <Route exact path="/profile" element={<Profile />} />
+            <Route exact path="/browsing/:squareid" 
+            element={<SquareDetails square_details={this.state.squares_info} />}/>
+          </Routes>
+        </div>
+      </>
     );
   }
 }
