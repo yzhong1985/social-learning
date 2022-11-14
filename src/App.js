@@ -46,6 +46,8 @@ class App extends Component {
       columnOrder: ['column-1', 'column-2'],
       new_step : '',
       new_resource : '',
+      new_title : '',
+      square_titles: ['Sam_study_guide'],
       data_count : 4,
       squares_info:sampleData.squares,
 
@@ -54,6 +56,7 @@ class App extends Component {
 
     this.inputChangeHandler = this.inputChangeHandler.bind(this)
     this.add_to_browse = this.add_to_browse.bind(this)
+    this.titleInputChangeHandler = this.titleInputChangeHandler.bind(this)
 
   }
 
@@ -66,52 +69,42 @@ class App extends Component {
     }
   
     if (destination.droppableId === source.droppableId && destination.index === source.index) {
-      return;
+      return
     }
   
-    const column = this.state.columns[source.droppableId];
-    const newTaskIds = Array.from(column.taskIds);
-    newTaskIds.splice(source.index, 1);
-    newTaskIds.splice(destination.index, 0, draggableId);
-  
-    const newColumn = {
-      ...column,
-      taskIds: newTaskIds,
-    };
-  
-    const newState = {
-      ...this.state,
-      columns: {
-        ...this.state.columns,
-        [newColumn.id]: newColumn,
-      },
-    };
-  
-    this.setState(newState);
-
-  };
-
+    const column = this.state.columns[source.droppableId]
+    const newTaskIds = Array.from(column.taskIds)
+    newTaskIds.splice(source.index, 1)
+    newTaskIds.splice(destination.index, 0, draggableId)
+  }
 
   inputChangeHandler(e) {
     this.setState(prevState => ({
-     ...prevState.new_things,
+    //  ...prevState.new_things,
+     [e.target.name]: e.target.value,
+     }))
+   }
+
+   titleInputChangeHandler(e) {
+    this.setState(prevState => ({
+    //  ...prevState.new_things,
      [e.target.name]: e.target.value,
      })); 
    }
 
 
-  submitHandler = e => {
-    
-    e.preventDefault();
-
+   submitHandler = e => {
+    e.preventDefault()
     this.setState(prevState => {
       // increment task count
-      var newCount_1 = prevState.count + 1;
+      var newCount_1 = prevState.count + 1
       // create new id based on task count
-      const newId_1 = `task-${newCount_1}`;
-      var newCount_2 = newCount_1 + 1;
+
+      const newId_1 = `task-${newCount_1}`
+
+      var newCount_2 = newCount_1 + 1
       // create new id based on task count
-      const newId_2 = `task-${newCount_2}`;
+      const newId_2 = `task-${newCount_2}`
 
       return {
         count: newCount_2,
@@ -136,9 +129,9 @@ class App extends Component {
             taskIds: [...prevState.columns['column-2'].taskIds, newId_2],
           },
         },
-      };
-    });
-  };
+      }
+    })
+  }
 
   // add this.state into data state under a new square 
   add_to_browse() {
@@ -147,14 +140,18 @@ class App extends Component {
       var steps_array = []
       var resources_array = []
       this.state.columnOrder?.map((columnId) => {
-        const column = this.state.columns[columnId]
-        const map_tasks = column.taskIds.map(taskId => this.state.tasks[taskId])
+        const column = this.state.columns[columnId];
+        const map_tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
         console.log("map tasks: ",map_tasks)
+  
         map_tasks.map(task => console.log("accessing content ",task['content']))
-        if (column.title === 'steps') {
+        if (column.title == 'steps') {
+
           map_tasks.map(task => steps_array.push(task['content']))
         } else {
+
           map_tasks.map(task => resources_array.push(task['content']))
+  
         }
       })
       console.log(steps_array,resources_array)
@@ -165,16 +162,16 @@ class App extends Component {
       const data_count = this.state.data_count + 1
       // ...this.data_state.squares_info,
       return {
+        new_title: '',
         data_count: data_count,
         squares_info: [
           ...prevState.squares_info,
           {
-            id: "" + data_count,
-            title: "Sam_study_guide",
-            content: guide_array.toString(),
-          },
-        ],
-      }; 
+          id: ''+data_count,
+          title: prevState.new_title,
+          content: guide_array.toString()
+        }]
+      } 
     }
 
     this.setState(newDataState,()=>console.log("the new state is ", this.state))
@@ -195,19 +192,15 @@ class App extends Component {
         <TopNavBar></TopNavBar>
         <div className="container">
           <Routes>
-            <Route exact path="/home" element={
-                <Panel
-                  add_to_browse={this.add_to_browse}
-                  onDragEnd={this.onDragEnd}
-                  inputChangeHandler={this.inputChangeHandler}
-                  submitHandler={this.submitHandler}
-                  tasks={this.state.tasks}
-                  columns={this.state.columns}
-                  columnOrder={this.state.columnOrder}
-                  new_step={this.state.new_step}
-                  new_resource={this.state.new_resource}
-                />
-              }/>
+          <Route exact path='/home' element={<Panel add_to_browse={this.add_to_browse} onDragEnd={this.onDragEnd} inputChangeHandler={this.inputChangeHandler}
+            submitHandler={this.submitHandler}
+            tasks={this.state.tasks} 
+            columns={this.state.columns} 
+            columnOrder={this.state.columnOrder} 
+            new_step={this.state.new_step} 
+            new_resource={this.state.new_resource}
+            new_title={this.state.new_title}
+            titleInputChangeHandler={this.titleInputChangeHandler} />} />
             <Route exact path="/browsing" element={<Browsingpage data_state={this.state} />} />
             <Route exact path="/profile" element={<Profile />} />
             <Route exact path="/browsing/:squareid" 
