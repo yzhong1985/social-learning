@@ -7,7 +7,11 @@ import Profile from "./Profile"
 import SquareDetails from "./SquareDetails"
 import TopNavBar from "./components/TopNavBar"
 
+
 import "./App.css";
+import "./styles/navbar.css";
+
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import sampleData from "./data/datasample.json"

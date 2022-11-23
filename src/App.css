@@ -15,19 +15,7 @@
   padding-right: var(--bs-navbar-nav-link-padding-x);
   padding-left: var(--bs-navbar-nav-link-padding-x);
 }
-.navbar-nav a {
-  color: #fff;
-  text-decoration: none;
-}
-.navbar-nav li {
-  margin-top: 0;
-}
-.navbar-nav li.active {
-  font-weight: bold;
-}
-.navbar-nav li:hover {
-  font-weight: bold;
-}
+
 .row-buttons button {
   margin: 5px 5px 0 0;
 }
