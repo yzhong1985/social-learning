@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import Panel from "./Panel";
-import Browsingpage from "./Browsingpage"
+import BrowsingPage from "./BrowsingPage"
 import Profile from "./Profile"
 import SquareDetails from "./SquareDetails"
 import TopNavBar from "./components/TopNavBar"
@@ -148,7 +148,6 @@ class App extends Component {
         const map_tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
         console.log("map tasks: ",map_tasks)
   
-        map_tasks.map(task => console.log("accessing content ",task['content']))
         if (column.title == 'steps') {
 
           map_tasks.map(task => steps_array.push(task['content']))
@@ -160,8 +159,7 @@ class App extends Component {
       })
       console.log(steps_array,resources_array)
       // add this instance to the data state
-      const guide_array = steps_array.concat(resources_array)
-      console.log("guide_array: ",guide_array)
+      // const guide_array = steps_array.concat(resources_array)
 
       const data_count = this.state.data_count + 1
       // ...this.data_state.squares_info,
@@ -173,7 +171,8 @@ class App extends Component {
           {
           id: ''+data_count,
           title: prevState.new_title,
-          content: guide_array.toString()
+          step_content: steps_array,
+          resource_content:resources_array
         }]
       } 
     }
@@ -205,7 +204,7 @@ class App extends Component {
             new_resource={this.state.new_resource}
             new_title={this.state.new_title}
             titleInputChangeHandler={this.titleInputChangeHandler} />} />
-            <Route exact path="/browsing" element={<Browsingpage data_state={this.state} />} />
+            <Route exact path="/browsing" element={<BrowsingPage data_state={this.state} />} />
             <Route exact path="/profile" element={<Profile />} />
             <Route exact path="/browsing/:squareid" 
             element={<SquareDetails square_details={this.state.squares_info} />}/>

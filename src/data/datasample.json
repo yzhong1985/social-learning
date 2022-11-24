@@ -10,9 +10,9 @@
         {"id":"task-8","content":"research step 8"}
     ],
     "squares":[
-        {"id": "1","title": "Sam guide 1","content": "guide 1 content"},
-        {"id": "2","title": "Yang guide 1","content": "guide 2 content"},
-        {"id": "3","title": "Yang guide 2","content": "guide 3 content"},
-        {"id": "4","title": "Sam guide 2","content": "guide 4 content"}
+        {"id": "1","title": "Sam guide 1","step_content": ["read","write","listen"],"resource_content":["book","book","book"]},
+        {"id": "2","title": "Yang guide 1","step_content": ["read","write","listen"],"resource_content":["book","book","book"]},
+        {"id": "3","title": "Yang guide 2","step_content": ["read","write","listen"],"resource_content":["book","book","book"]},
+        {"id": "4","title": "Sam guide 2","step_content": ["read","write","listen"],"resource_content":["book","book","book"]}
     ]
 }
