@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import BrowsingSquare from "./BrowsingSquare"
 import Button from 'react-bootstrap/Button';
+import RequestButton from "./RequestButton";
 
 import "./styles/browsing.css";
 
@@ -22,9 +23,7 @@ class BrowsingPage extends Component {
           })
         }
       </div>
-      <div className='resources-bottom-section'>
-        <Button className="request-button" variant="primary" type="submit" value="Submit">Request</Button>
-      </div>
+      <RequestButton />
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
-import Questionwindow from "./Questionwindow";
+import QuestionWindow from "./QuestionWindow";
 import Button from 'react-bootstrap/Button';
 
 const RequestButton = (props)=>{
@@ -22,7 +22,7 @@ const RequestButton = (props)=>{
             <Modal.Title className="ms-auto">Add Your Desired Guide Request</Modal.Title>
           </Modal.Header>
           <Modal.Body >
-            <Questionwindow />
+            <QuestionWindow />
           </Modal.Body>
         </Modal>
           
