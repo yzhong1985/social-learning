@@ -5,13 +5,6 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { Link } from "react-router-dom";
 import RequestPage from "./RequestPage";
 
-const linkStyle = {
-  margin: "1rem",
-  textDecoration: "none",
-  fontsize: "1.3rem",
-  color: "black",
-};
-
 const RequestList = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -27,29 +20,18 @@ const RequestList = (props) => {
 
   return (
     <div>
-      <Button onClick={handleShow} style={linkStyle}>
-        🤔️ Request List
-      </Button>
-
+      <Button onClick={handleShow}>🤔️ Request List</Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header className="px-4" closeButton>
           <Modal.Title className="ms-auto">Request List</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ListGroup
-            variant="flush"
-            style={{ display: "flex", flexDirection: "row" }}
-          >
-            <div style={{ flex: 1 }}>
+          <ListGroup variant="flush">
+            <div>
               {props.question_list.questions.map((element) => {
                 return (
                   <ListGroup.Item>
-                    <Link
-                      onClick={() =>
-                        handleName([element.id, element.question_content])
-                      }
-                      style={linkStyle}
-                    >
+                    <Link onClick={() =>handleName([element.id, element.question_content])}>
                       {element.question_content}
                     </Link>
                   </ListGroup.Item>
@@ -60,14 +42,12 @@ const RequestList = (props) => {
 
           <Modal show={secondShow} onHide={() => setSecondShow(false)}>
             <Modal.Header className="px-4" closeButton>
-              <Modal.Title className="ms-auto">
-                {selectedQuestion[1]}
-              </Modal.Title>
+              <Modal.Title className="ms-auto">{selectedQuestion[1]}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <RequestPage
-                current_id={selectedQuestion[0]}
-                data_props={props.question_list.questions}
+              <RequestPage 
+              current_id={selectedQuestion[0]} 
+              data_props={props.question_list.questions}
               />
             </Modal.Body>
           </Modal>

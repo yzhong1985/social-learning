@@ -4,31 +4,22 @@ import ListGroup from "react-bootstrap/ListGroup";
 import CommentSection from "./CommentSection";
 import LikeButton from "./LikeButton";
 import { Link } from "react-router-dom";
-import thumbup from "./images/thumbup.png";
 import "./styles/Square.css";
-
-const linkStyle = {
-  margin: "1rem",
-  textDecoration: "none",
-  fontsize: "1.3rem",
-  color: "blue",
-};
 
 const BrowsingSquare = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const id = props.id;
-  console.log("data state: ", props.data_state);
 
   let currSquare = props.data_state.squares_info.find(
     (square) => square.id === id
   );
-  console.log("currSquare: ", currSquare);
+
   return (
     // <>
     <div>
-      <Link onClick={handleShow} style={linkStyle}>
+      <Link onClick={handleShow}>
         {props.title}
       </Link>
 

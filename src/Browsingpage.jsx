@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import BrowsingSquare from "./BrowsingSquare";
-import Button from "react-bootstrap/Button";
 import RequestButton from "./RequestButton";
 import RequestList from "./RequestList";
-
 import "./styles/browsing.css";
 
 class BrowsingPage extends Component {
@@ -33,14 +31,12 @@ class BrowsingPage extends Component {
 
   handleChangeOnQuestion(e) {
     this.setState((prevState) => ({
-      //  ...prevState.new_things,
       [e.target.name]: e.target.value,
     }));
   }
 
   handleChangeOnNote(e) {
     this.setState((prevState) => ({
-      //  ...prevState.new_things,
       [e.target.name]: e.target.value,
     }));
   }

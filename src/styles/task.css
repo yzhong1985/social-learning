@@ -1,0 +1,19 @@
+.task-div {
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  padding: 8px;
+  margin-bottom: 8px;
+  background-color: #1e90ff;
+  border-radius: 15px;
+}
+
+.tasklist-div {
+  padding: 8px;
+}
+
+.container-div {
+  margin: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  display: inline-block;
+}
