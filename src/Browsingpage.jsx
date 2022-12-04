@@ -62,10 +62,10 @@ class BrowsingPage extends Component {
   render() {
     return (
       <div className="container">
-        <div className="resources-items">
+        <div className="res-squares-container">
           {this.props.data_state.squares_info.map((element, index) => {
             return (
-              <div className="element" key={index}>
+              <div className="res-square" key={index}>
                 <BrowsingSquare
                   data_state={this.props.data_state}
                   element={element}
@@ -76,14 +76,16 @@ class BrowsingPage extends Component {
             );
           })}
         </div>
-        <RequestButton
-          new_question={this.state.new_question}
-          new_note={this.state.new_note}
-          handleChangeOnQuestion={this.handleChangeOnQuestion}
-          handleChangeOnNote={this.handleChangeOnQuestion}
-          add_question={this.add_question}
-        />
-        <RequestList question_list={this.state} />
+        <div className="res-bottom-items">
+          <RequestList question_list={this.state} />
+          <RequestButton
+            new_question={this.state.new_question}
+            new_note={this.state.new_note}
+            handleChangeOnQuestion={this.handleChangeOnQuestion}
+            handleChangeOnNote={this.handleChangeOnQuestion}
+            add_question={this.add_question}
+          />
+        </div>
       </div>
     );
   }

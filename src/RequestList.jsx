@@ -19,8 +19,8 @@ const RequestList = (props) => {
   };
 
   return (
-    <div>
-      <Button onClick={handleShow}>🤔️ Request List</Button>
+    <div className="request-list-btn">
+      <Button variant="secondary" onClick={handleShow}>🤔️ Request List</Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header className="px-4" closeButton>
           <Modal.Title className="ms-auto">Request List</Modal.Title>

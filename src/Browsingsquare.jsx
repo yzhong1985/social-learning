@@ -4,7 +4,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import CommentSection from "./CommentSection";
 import LikeButton from "./LikeButton";
 import { Link } from "react-router-dom";
-import "./styles/Square.css";
+import "./styles/square.css";
 
 const BrowsingSquare = (props) => {
   const [show, setShow] = useState(false);
@@ -18,10 +18,17 @@ const BrowsingSquare = (props) => {
 
   return (
     // <>
-    <div>
+    <div className="res-item">
+      <div className="res-uppperbox">
+
+      </div>
+      <div className="res-item-description">
       <Link onClick={handleShow}>
         {props.title}
       </Link>
+      </div>
+      
+
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header className="px-4" closeButton>

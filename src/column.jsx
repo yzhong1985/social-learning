@@ -6,8 +6,8 @@ import "./styles/task.css";
 export default class Column extends React.Component {
   render() {
     return (
-      <div className="container-div">
-        <h3>{this.props.column.title}</h3>
+      <div className="panel-col-div">
+        <div className="col-title-div">{this.props.column.title}</div>
         <Droppable droppableId={this.props.column.id}>
           {(provided) => (
             <div

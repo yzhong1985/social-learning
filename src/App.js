@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import React, { Component } from "react";
 import Panel from "./Panel";
 import BrowsingPage from "./BrowsingPage";
@@ -6,7 +6,7 @@ import Profile from "./Profile";
 import SquareDetails from "./SquareDetails";
 import TopNavBar from "./components/TopNavBar";
 
-import "./styles/App.css";
+import "./styles/app.css";
 import "./styles/navbar.css";
 import sampleData from "./data/datasample.json";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -22,7 +22,6 @@ class App extends Component {
         "task-2": { id: "task-2", content: "research step 2" },
         "task-3": { id: "task-3", content: "research step 3" },
         "task-4": { id: "task-4", content: "research step 4" },
-
         "task-5": { id: "task-5", content: "book 1" },
         "task-6": { id: "task-6", content: "book 2" },
         "task-7": { id: "task-7", content: "book 3" },
@@ -30,16 +29,8 @@ class App extends Component {
       },
 
       columns: {
-        "column-1": {
-          id: "column-1",
-          title: "Steps",
-          taskIds: ["task-1", "task-2", "task-3", "task-4"],
-        },
-        "column-2": {
-          id: "column-2",
-          title: "Resources",
-          taskIds: ["task-5", "task-6", "task-7", "task-8"],
-        },
+        "column-1": { id: "column-1", title: "Steps", taskIds: ["task-1", "task-2", "task-3", "task-4"],},
+        "column-2": { id: "column-2", title: "Resources", taskIds: ["task-5", "task-6", "task-7", "task-8"],},
       },
 
       columnOrder: ["column-1", "column-2"],
@@ -188,10 +179,8 @@ class App extends Component {
         <TopNavBar></TopNavBar>
         <div className="container">
           <Routes>
-            <Route
-              exact
-              path="/home"
-              element={
+          <Route path="/" element={<Navigate to="/home" />} />
+            <Route exact path="/home" element={
                 <Panel
                   add_to_browse={this.add_to_browse}
                   onDragEnd={this.onDragEnd}
@@ -207,18 +196,9 @@ class App extends Component {
                 />
               }
             />
-            <Route
-              exact
-              path="/browsing"
-              element={<BrowsingPage data_state={this.state} />}
-            />
+            <Route exact path="/browsing" element={<BrowsingPage data_state={this.state} />}/>
             <Route exact path="/profile" element={<Profile />} />
-            <Route
-              exact
-              path="/browsing/:squareid"
-              element={
-                <SquareDetails square_details={this.state.squares_info} />
-              }
+            <Route exact path="/browsing/:squareid" element={ <SquareDetails square_details={this.state.squares_info} />}
             />
           </Routes>
         </div>
