@@ -1,32 +1,22 @@
-import React from 'react';
-import styled from 'styled-components';
-import {Draggable} from 'react-beautiful-dnd';
-
-const Container = styled.div`
-  border: 1px solid lightgrey;
-  border-radius: 2px;
-  padding: 8px;
-  margin-bottom: 8px;
-  background-color: #1E90FF;
-  border-radius: 15px;
-`;
+import React from "react"
+import styled from "styled-components"
+import { Draggable } from "react-beautiful-dnd"
+import "./styles/task.css"
 
 export default class Task extends React.Component {
   render() {
     return (
-    <Draggable draggableId={this.props.task.id} index={this.props.index}>
-      {provided => (
-        <Container
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-        >
-          {this.props.task.content}
-        </Container>
-      )}
-    {/* <button onClick={this.props.removeBox}>X</button> */}
-
-    </Draggable>
+      <Draggable draggableId={this.props.task.id} index={this.props.index}>
+        {(provided) => (
+          <div className="task-div"
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            {this.props.task.content}
+          </div>
+        )}
+      </Draggable>
     );
   }
 }

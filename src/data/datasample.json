@@ -1,0 +1,18 @@
+{
+    "tasks": [
+        {"id":"task-1","content":"research step 1"},
+        {"id":"task-2","content":"research step 2"},
+        {"id":"task-3","content":"research step 3"},
+        {"id":"task-4","content":"research step 4"},
+        {"id":"task-5","content":"research step 5"},
+        {"id":"task-6","content":"research step 6"},
+        {"id":"task-7","content":"research step 7"},
+        {"id":"task-8","content":"research step 8"}
+    ],
+    "squares":[
+        {"id": "1","title": "Sam guide 1","step_content": ["read","write","listen"],"resource_content":["book","book","book"]},
+        {"id": "2","title": "Yang guide 1","step_content": ["read","write","listen"],"resource_content":["book","book","book"]},
+        {"id": "3","title": "Yang guide 2","step_content": ["read","write","listen"],"resource_content":["book","book","book"]},
+        {"id": "4","title": "Sam guide 2","step_content": ["read","write","listen"],"resource_content":["book","book","book"]}
+    ]
+}
