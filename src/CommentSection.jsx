@@ -2,7 +2,7 @@ import React, { Component, useState } from "react";
 import CommentBox from "./CommentBox";
 import Comment from "./Comment";
 
-import { BiConfused } from "react-icons/bi";
+
 
 let commentCounter = 1;
 
