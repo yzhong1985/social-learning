@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { BiConfused } from "react-icons/bi";
+
 class CommentBox extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +22,9 @@ class CommentBox extends Component {
 
     return (
       <div className="comments-box">
+        
+        <BiConfused className="confuse-icon" /> &nbsp;
+
         <input
           onKeyPress={this.props.enterCommentLine}
           value={this.props.commentValue}

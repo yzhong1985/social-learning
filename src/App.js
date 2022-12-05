@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Panel from "./Panel";
 import BrowsingPage from "./BrowsingPage";
 import Profile from "./Profile";
+import Footer from "./Footer";
 import SquareDetails from "./SquareDetails";
 import TopNavBar from "./components/TopNavBar";
 
@@ -202,6 +203,7 @@ class App extends Component {
             />
           </Routes>
         </div>
+
       </>
     );
   }

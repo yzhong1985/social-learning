@@ -17,7 +17,7 @@
 
   .res-square {
     width:200px;
-    height: 200px;
+    height: 210px;
     background-color: #D9D9D9;
     margin: 10px;
     border-radius: 15px;
@@ -43,8 +43,7 @@
   .res-item-description {
     width: 100%;
     float: left;
-    height: 50px;
-    border-bottom: 1.5px solid #999;
+    height: 43px;
     text-align: center;
     padding:10px;
     display: flex;
@@ -59,6 +58,34 @@
 
   }
 
+  .res-item-thumbup {
+    width: 100%;
+    clear: both;
+    border-bottom: 1.5px solid #999;
+    text-align: right;
+    padding-right: 15px;
+  }
+
+  .res-item-author {
+    width: 100%;
+    clear: both;
+    color: #000;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    padding-top: 5px;
+  }
+
+  .res-item-modal-title-auth {
+    width: 300px;
+    float: left;
+    clear: both;
+    font-size: 15px;
+    font-weight: 600;
+    padding-top: 5px;
+    position: absolute;
+    top: 0;
+  }
 
   .res-item-bottom {
     display: inline-flex;
@@ -70,9 +97,7 @@
     align-self: flex-end;
   }
 
-  .res-item-thumbup img {
-    height: 20px;
-    width: 20px;
+  .res-item-thumbup-icon {
     margin-bottom: 5px;
   }
 
@@ -80,7 +105,7 @@
   width: 100%;
   float: left;
   background-color: #1788DA;
-  height: 120px;
+  height: 100px;
   border-radius: 15px;
 }
 
@@ -106,8 +131,6 @@
   font-weight: bold;
 }
 
-
-
 .request-btn {
   float: right;
   margin-right: 30px;
@@ -119,4 +142,84 @@
   background-color: #1788DA;
 }
 
+.res-item-modal-title {
+  background-color: #1788DA;
+}
 
+.res-item-modal-title-content {
+  width: 100%;
+  clear: both;
+  text-align:center;
+  float: left;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.res-item-modal .modal-content {
+  border: none;
+}
+
+.list-res-steps-title {
+  width: 400px;
+  clear: both;
+  display: block;
+}
+
+.list-col-name {
+  width: 195px;
+  float: left;
+  padding: 0 0 10px 10px;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.res-steps-list-groups {
+  width: 400px;
+  float: left;
+}
+
+.res-steps-list-item div {
+  border: none;
+  border-bottom: solid #000 1px;
+  margin-right: 15px;
+}
+
+.res-step-group-bottom {
+  border-top: solid #000 1px;
+  margin-top: 30px;
+  padding-top: 10px;
+  width: 100%;
+  float: left;
+}
+
+.res-step-group-comment {
+  width: 200px;
+  float: left;
+}
+
+.like-button-wrapper {
+  float: right;
+}
+
+.like-button {
+  height: 5px;
+}
+
+.res-step-comment {
+  width: 100%;
+  float: left;
+}
+
+.confuse-icon {
+  font-size: 25px;
+}
+
+.comments-box input {
+  background-color: #1788DA;
+  border-radius: 15px;
+  color: #fff;
+}
+
+.comments-box input::placeholder {
+  color: #fff;
+}

@@ -1,10 +1,8 @@
 import React, { Component, useState } from "react";
 import CommentBox from "./CommentBox";
 import Comment from "./Comment";
-import {
-  ContactSupportOutlined,
-  ThreeDRotationSharp,
-} from "@material-ui/icons";
+
+import { BiConfused } from "react-icons/bi";
 
 let commentCounter = 1;
 
